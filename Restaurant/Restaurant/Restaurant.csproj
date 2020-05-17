@@ -120,5 +120,8 @@
   <ItemGroup>
     <Resource Include="Resources\Images\chef3.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\back-icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

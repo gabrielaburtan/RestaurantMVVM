@@ -5,8 +5,101 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant.Views"
         mc:Ignorable="d"
-        Title="SignUpView" Height="450" Width="800">
+        Title="La Burtanica" Height="650" Width="450" WindowStartupLocation="CenterScreen" Background="#fbc4ab">
+    <Window.Resources>
+        <Style x:Key="RoundedBorder" TargetType="Border">
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
+        <Style x:Key="RoundedButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#f4978e"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10,10,10,10" Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding  Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding  VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#f08080"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#f9dcc4"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="RoundedTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border CornerRadius="10,10,10,10" Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
+                            <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding  VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RoundedPasswordBoxStyle" TargetType="{x:Type PasswordBox}">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border CornerRadius="10,10,10,10" Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
+                            <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding  VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="93*"/>
+            <RowDefinition Height="68*"/>
+            <RowDefinition Height="72*"/>
+            <RowDefinition Height="72*"/>
+            <RowDefinition Height="72*"/>
+            <RowDefinition Height="72*"/>
+            <RowDefinition Height="72*"/>
+            <RowDefinition Height="58*"/>
+            <RowDefinition Height="40*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="95*"/>
+            <ColumnDefinition Width="126*"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Row="0" Grid.ColumnSpan="2" Source="../Resources/Images/logo1.png" Margin="-175,0,-181,58" Grid.RowSpan="2"/>
+        <Label Grid.ColumnSpan="2" Content="Creeaza cont" HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"
+               FontSize="25" FontFamily="Lucida Calligraphy" Height="48" Width="286" Margin="78,10" Grid.Row="1"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Nume:" VerticalAlignment="Center" HorizontalAlignment="Center"
+               FontSize="20" FontFamily="Lucida Calligraphy" Height="40" Width="100" HorizontalContentAlignment="Center" Margin="45,15,45,17"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Prenume:" FontSize="20" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center"
+               VerticalAlignment="Top" Height="39" Width="130" HorizontalContentAlignment="Center" Margin="30,10,30,0"/>
+        <Label Grid.Row="4" Grid.Column="0" Content="Email:" FontSize="20" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Height="39" HorizontalContentAlignment="Center" Width="130" Margin="30,10,30,23"/>
+        <Label Grid.Row="5" Grid.Column="0" Content="Parola:" FontSize="20" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Height="39" HorizontalContentAlignment="Center" Width="130" Margin="30,10,30,23"/>
+        <Label Grid.Row="6" Grid.Column="0" Content="Confirma&#xa;  parola:" FontSize="20" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Height="72" HorizontalContentAlignment="Center" Width="130" Margin="30,0"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="0,20,30,20" Style="{StaticResource RoundedTextBoxStyle}"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="0,15,30,25" Style="{StaticResource RoundedTextBoxStyle}"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="0,15,30,25" Style="{StaticResource RoundedTextBoxStyle}"/>
+        <PasswordBox Grid.Row="5" Grid.Column="1" Margin="0,15,30,25" Style="{StaticResource RoundedPasswordBoxStyle}"/>
+        <PasswordBox Grid.Row="6" Grid.Column="1" Margin="0,15,30,25" Style="{StaticResource RoundedPasswordBoxStyle}"/>
+        <Button Grid.ColumnSpan="2" Grid.Row="7" Style="{StaticResource RoundedButtonStyle}" Content="Creeaza cont"
+                FontFamily="Lucida Calligraphy" FontSize="20" Margin="130,15,130,10"/>
+        <Button Grid.Column="0" Grid.Row="8" Width="50" HorizontalAlignment="Left" Margin="10,2,0,5"
+                Style="{StaticResource RoundedButtonStyle}" FontSize="20">
+            <Image Source="../Resources/Images/back-icon.png" Width="82"></Image>
+        </Button>
     </Grid>
 </Window>
