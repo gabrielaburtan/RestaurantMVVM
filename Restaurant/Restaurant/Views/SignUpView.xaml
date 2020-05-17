@@ -80,7 +80,9 @@
             <ColumnDefinition Width="95*"/>
             <ColumnDefinition Width="126*"/>
         </Grid.ColumnDefinitions>
+        <Rectangle Grid.ColumnSpan="2" Grid.Row="0" Fill="#f8edeb"></Rectangle>
         <Image Grid.Row="0" Grid.ColumnSpan="2" Source="../Resources/Images/logo1.png" Margin="-175,0,-181,58" Grid.RowSpan="2"/>
+       
         <Label Grid.ColumnSpan="2" Content="Creeaza cont" HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"
                FontSize="25" FontFamily="Lucida Calligraphy" Height="48" Width="286" Margin="78,10" Grid.Row="1"/>
@@ -99,8 +101,10 @@
         <TextBox Grid.Row="4" Grid.Column="1" Margin="0,15,30,25" Style="{StaticResource RoundedTextBoxStyle}"/>
         <PasswordBox Grid.Row="5" Grid.Column="1" Margin="0,15,30,25" Style="{StaticResource RoundedPasswordBoxStyle}"/>
         <PasswordBox Grid.Row="6" Grid.Column="1" Margin="0,15,30,25" Style="{StaticResource RoundedPasswordBoxStyle}"/>
+        <Rectangle Grid.ColumnSpan="2" Grid.Row="7" Fill="#f8edeb"></Rectangle>
         <Button Grid.ColumnSpan="2" Grid.Row="7" Style="{StaticResource RoundedButtonStyle}" Content="Creeaza cont"
                 FontFamily="Lucida Calligraphy" FontSize="20" Margin="130,15,130,10"/>
+        <Rectangle Grid.ColumnSpan="2" Grid.Row="8" Fill="#f8edeb"></Rectangle>
         <Button Grid.Column="0" Grid.Row="8" Width="50" HorizontalAlignment="Left" Margin="10,2,0,5"
                 Style="{StaticResource RoundedButtonStyle}" FontSize="20" Command="{Binding BackCommand}">
             <Image Source="../Resources/Images/back-icon.png" Width="82"></Image>

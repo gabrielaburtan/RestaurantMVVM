@@ -50,5 +50,25 @@ namespace Restaurant.ViewModels
             App.Current.MainWindow = signUpView;
             signUpView.Show();
         }
+
+        private ICommand withoutAccountCommand;
+        public ICommand WithoutAccountCommand
+        {
+            get
+            {
+                if (withoutAccountCommand == null)
+                {
+                    withoutAccountCommand = new RelayCommand(WithoutAccountMethod);
+                }
+                return withoutAccountCommand;
+            }
+        }
+        private void WithoutAccountMethod(object param)
+        {
+            CustomerView customerView = new CustomerView();
+            App.Current.MainWindow.Close();
+            App.Current.MainWindow = customerView;
+            customerView.Show();
+        }
     }
 }
