@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Restaurant.Views"
         xmlns:ctx="clr-namespace:Restaurant.ViewModels"
         mc:Ignorable="d"
-        Title="La Burtanica" Height="650" Width="450" WindowStartupLocation="CenterScreen" Background="#ffb4a2">
+        Title="La Burtanica" Height="650" Width="450" WindowStartupLocation="CenterScreen" Background="#ffb5a7">
     <Window.DataContext>
         <ctx:StartWindowViewModel/>
     </Window.DataContext>

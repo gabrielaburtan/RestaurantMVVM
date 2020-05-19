@@ -23,3 +23,5 @@ D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\Emplo
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\CustomerAccountView.baml
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\CustomerView.baml
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\EmployeeView.baml
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\MenuView.g.cs
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\MenuView.baml

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Restaurant.Views"
         xmlns:ctx="clr-namespace:Restaurant.ViewModels"
         mc:Ignorable="d"
-        Title="La Burtanica" Height="650" Width="450" WindowStartupLocation="CenterScreen" Background="#fbc4ab">
+        Title="La Burtanica" Height="650" Width="450" WindowStartupLocation="CenterScreen" Background="#f8edeb">
     <Window.DataContext>
         <ctx:SignUpViewModel/>
     </Window.DataContext>
@@ -15,7 +15,7 @@
             <Setter Property="CornerRadius" Value="5"/>
         </Style>
         <Style x:Key="RoundedButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#f4978e"/>
+            <Setter Property="Background" Value="#ffb5a7"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -38,7 +38,7 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="RoundedTextBoxStyle" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="#ffb5a7"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -51,7 +51,7 @@
             </Setter>
         </Style>
         <Style x:Key="RoundedPasswordBoxStyle" TargetType="{x:Type PasswordBox}">
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="#ffb5a7"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -82,10 +82,10 @@
         </Grid.ColumnDefinitions>
         <Rectangle Grid.ColumnSpan="2" Grid.Row="0" Fill="#f8edeb"></Rectangle>
         <Image Grid.Row="0" Grid.ColumnSpan="2" Source="../Resources/Images/logo1.png" Margin="-175,0,-181,58" Grid.RowSpan="2"/>
-       
+        <Rectangle Grid.ColumnSpan="2" Grid.Row="1" Fill="#ffb5a7"></Rectangle>
         <Label Grid.ColumnSpan="2" Content="Creeaza cont" HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"
-               FontSize="25" FontFamily="Lucida Calligraphy" Height="48" Width="286" Margin="78,10" Grid.Row="1"/>
+               FontSize="30" FontFamily="Lucida Calligraphy" Height="48" Width="286" Margin="78,10" Grid.Row="1"/>
         <Label Grid.Row="2" Grid.Column="0" Content="Nume:" VerticalAlignment="Center" HorizontalAlignment="Center"
                FontSize="20" FontFamily="Lucida Calligraphy" Height="40" Width="100" HorizontalContentAlignment="Center" Margin="45,15,45,17"/>
         <Label Grid.Row="3" Grid.Column="0" Content="Prenume:" FontSize="20" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center"

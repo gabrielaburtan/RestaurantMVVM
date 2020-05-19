@@ -11,6 +11,26 @@ namespace Restaurant.ViewModels
 {
     class CustomerViewModel:BaseViewModel
     {
+        private ICommand viewMenu;
+        public ICommand ViewMenu
+        {
+            get
+            {
+                if(viewMenu == null)
+                {
+                    viewMenu = new RelayCommand(ViewMenuMethod);
+                }
+                return viewMenu;
+            }
+        }
+        private void ViewMenuMethod(object param)
+        {
+            MenuView menuView = new MenuView();
+            App.Current.MainWindow.Close();
+            App.Current.MainWindow = menuView;
+            menuView.Show();
+        }
+
         private ICommand backCommand;
         public ICommand BackCommand
         {
