@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RestaurantModelStoreContainer" CdmEntityContainer="RestaurantEntities">
+    <EntitySetMapping Name="Allergens">
+      <EntityTypeMapping TypeName="RestaurantModel.Allergen">
+        <MappingFragment StoreEntitySet="Allergen">
+          <ScalarProperty Name="Allergen_ID" ColumnName="Allergen_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="RestaurantModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="RestaurantModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+          <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="RestaurantModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="State" ColumnName="State" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="RestaurantModel.Product">
+        <MappingFragment StoreEntitySet="Product">
+          <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="QuatityInStore" ColumnName="QuatityInStore" />
+          <ScalarProperty Name="Photos" ColumnName="Photos" />
+          <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="RestaurantModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_Product">
+      <EntityTypeMapping TypeName="RestaurantModel.Order_Product">
+        <MappingFragment StoreEntitySet="Order_Product">
+          <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+          <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Menu_Product" TypeName="RestaurantModel.Menu_Product" StoreEntitySet="Menu_Product">
+      <EndProperty Name="Menu">
+        <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+      </EndProperty>
+      <EndProperty Name="Product">
+        <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Order_Menu" TypeName="RestaurantModel.Order_Menu" StoreEntitySet="Order_Menu">
+      <EndProperty Name="Menu">
+        <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+      </EndProperty>
+      <EndProperty Name="Order">
+        <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Product_Allergen" TypeName="RestaurantModel.Product_Allergen" StoreEntitySet="Product_Allergen">
+      <EndProperty Name="Allergen">
+        <ScalarProperty Name="Allergen_ID" ColumnName="Allergen_ID" />
+      </EndProperty>
+      <EndProperty Name="Product">
+        <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

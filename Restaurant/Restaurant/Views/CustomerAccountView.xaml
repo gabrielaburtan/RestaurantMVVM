@@ -5,8 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant.Views"
         mc:Ignorable="d"
-        Title="CustomerAccountView" Height="450" Width="800">
+        Title="La Burtanica" Height="650" Width="450" WindowStartupLocation="CenterScreen" Background="#f8edeb">
+    <Window.Resources>
+        <Style x:Key="RoundedBorder" TargetType="Border">
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
+        <Style x:Key="RoundedButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#ffb5a7"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10,10,10,10" Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding  Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding  VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#e5989b"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#f9dcc4"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="73*"/>
+            <ColumnDefinition Width="73*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="126*"/>
+            <RowDefinition Height="443*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0" Source="../Resources/Images/logo1.png" Margin="-114,0,-148,0" Grid.ColumnSpan="2"/>
+        <Image Grid.Column="0" Source="../Resources/Images/chef3.png" Margin="0,74,0,0" Grid.RowSpan="2"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+            <Button Style="{StaticResource RoundedButtonStyle}" Height="35" Margin="40,100,40,0" Content="Vezi meniul"
+                    FontFamily="Lucida Calligraphy" FontSize="18"/>
+            <Button Style="{StaticResource RoundedButtonStyle}" Height="35" Margin="40,50,40,0" Content="Vezi meniul"
+                    FontFamily="Lucida Calligraphy" FontSize="18"/>
+        </StackPanel>
     </Grid>
 </Window>

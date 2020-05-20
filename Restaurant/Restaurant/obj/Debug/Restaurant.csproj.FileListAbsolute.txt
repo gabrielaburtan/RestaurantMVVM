@@ -25,3 +25,9 @@ D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\Custo
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\EmployeeView.baml
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\MenuView.g.cs
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\MenuView.baml
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\bin\Debug\EntityFramework.dll
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\bin\Debug\EntityFramework.SqlServer.dll
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\bin\Debug\EntityFramework.xml
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\bin\Debug\EntityFramework.SqlServer.xml
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Restaurant_Content.g.cs
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Restaurant.csproj.CopyComplete
