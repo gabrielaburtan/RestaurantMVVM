@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("resources/images/restaurant.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/restaurantmodel.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/restaurantmodel.tt")]
 
 

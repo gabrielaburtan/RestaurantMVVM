@@ -23,5 +23,15 @@ namespace Restaurant.Views
         {
             InitializeComponent();
         }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            (sender as TextBox).Text = "";
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            (sender as TextBox).Text = "Search...";
+        }
     }
 }

@@ -38,7 +38,6 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="RoundedTextBoxStyle" TargetType="{x:Type TextBox}">
-            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="500"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontFamily" Value="Lucida Calligraphy"/>
@@ -52,7 +51,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type TextBox}">
-                                <Border Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
+                                <Border CornerRadius="10,10,10,10" Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
                                     <ScrollViewer x:Name="PART_ContentHost"/>
                                 </Border>
                             </ControlTemplate>
@@ -75,7 +74,6 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="RoundedPasswordBoxStyle" TargetType="{x:Type PasswordBox}">
-            <Setter Property="FontSize" Value="20"/>
             <Setter Property="FontWeight" Value="500"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="FontFamily" Value="Lucida Calligraphy"/>
@@ -89,7 +87,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type PasswordBox}">
-                                <Border Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
+                                <Border CornerRadius="10,10,10,10" Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
                                     <ScrollViewer x:Name="PART_ContentHost"/>
                                 </Border>
                             </ControlTemplate>

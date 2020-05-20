@@ -11,7 +11,7 @@
         <ctx:MenuViewModel></ctx:MenuViewModel>
     </Window.DataContext>
     <Window.Resources>
-        
+
         <Style x:Key="RoundedBorder" TargetType="Border">
             <Setter Property="CornerRadius" Value="5"/>
         </Style>
@@ -51,16 +51,16 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type TextBox}">
-                                <Border Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
+                                <Border CornerRadius="10,10,10,10" Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
                                     <ScrollViewer x:Name="PART_ContentHost"/>
                                 </Border>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
                 </Trigger>
-
                 <Trigger Property="IsFocused" Value="True">
                     <Setter Property="Background" Value="#ffb5a7"/>
+                    <Setter Property="Text" Value=""/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type TextBox}">
@@ -102,8 +102,11 @@
             <Button Width="90" Margin="8,15,10,15" Style="{StaticResource RoundedButtonStyle}" Content="Bauturi"
                     FontFamily="Lucida Calligraphy" HorizontalContentAlignment="Center" FontSize="18"/>
         </StackPanel>
-        <TextBox Grid.Row="2" HorizontalAlignment="Center" Style="{StaticResource RoundedTextBoxStyle}" Width="200"
-                 Margin="0,8,0,8" Text="Search" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <WrapPanel Grid.Row="2" HorizontalAlignment="Center">
+            <TextBox  Style="{StaticResource RoundedTextBoxStyle}" Width="200"
+                 Margin="0,8,0,8" Text="Search..." HorizontalContentAlignment="Center" VerticalContentAlignment="Center" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+            <Image Source="../Resources/Images/searching.png" Width="50" Margin="0 0 0 6"/>
+        </WrapPanel>
         <ListView Grid.Row="3" x:Name="TvBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ProductsCollection}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
