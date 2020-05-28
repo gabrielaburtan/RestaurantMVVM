@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RestaurantModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Allergen">
           <Key>
             <PropertyRef Name="Allergen_ID" />
@@ -26,7 +26,8 @@
           <Property Name="Menu_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Category_ID" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Price" Type="real" Nullable="false" />
+          <Property Name="Photo1" Type="image" />
+          <Property Name="Photo2" Type="image" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Restaurant.dbo.Menu_Product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -34,9 +35,11 @@ warning 6002: The table/view 'Restaurant.dbo.Menu_Product' does not have a prima
           <Key>
             <PropertyRef Name="Menu_ID" />
             <PropertyRef Name="Product_ID" />
+            <PropertyRef Name="Quantity" />
           </Key>
           <Property Name="Menu_ID" Type="int" Nullable="false" />
           <Property Name="Product_ID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -77,7 +80,8 @@ warning 6002: The table/view 'Restaurant.dbo.Order_Product' does not have a prim
           <Property Name="Price" Type="real" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="QuatityInStore" Type="int" Nullable="false" />
-          <Property Name="Photos" Type="image" Nullable="false" />
+          <Property Name="Photo1" Type="image" />
+          <Property Name="Photo2" Type="image" />
           <Property Name="Category_ID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -247,7 +251,7 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="RestaurantModelStoreContainer">
+        <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Allergen" EntityType="Self.Allergen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
@@ -257,7 +261,8 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
           <EntitySet Name="Menu_Product" EntityType="Self.Menu_Product" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Menu_Product].[Menu_ID] AS [Menu_ID], 
-    [Menu_Product].[Product_ID] AS [Product_ID]
+    [Menu_Product].[Product_ID] AS [Product_ID], 
+    [Menu_Product].[Quantity] AS [Quantity]
     FROM [dbo].[Menu_Product] AS [Menu_Product]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Order_Menu" EntityType="Self.Order_Menu" store:Type="Tables" store:Schema="dbo">
@@ -332,7 +337,7 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="RestaurantModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Allergen">
           <Key>
             <PropertyRef Name="Allergen_ID" />
@@ -359,9 +364,10 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
           <Property Name="Menu_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Category_ID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Price" Type="Single" Nullable="false" />
+          <Property Name="Photo1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Photo2" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Menu_Category" FromRole="Menu" ToRole="Category" />
-          <NavigationProperty Name="Products" Relationship="Self.Menu_Product" FromRole="Menu" ToRole="Product" />
+          <NavigationProperty Name="Menu_Product" Relationship="Self.FK_Menu_Product_Menu" FromRole="Menu" ToRole="Menu_Product" />
           <NavigationProperty Name="Orders" Relationship="Self.Order_Menu" FromRole="Menu" ToRole="Order" />
         </EntityType>
         <EntityType Name="Order">
@@ -384,11 +390,12 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
           <Property Name="Price" Type="Single" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="QuatityInStore" Type="Int32" Nullable="false" />
-          <Property Name="Photos" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Photo1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Photo2" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Category_ID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Product_Category" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Menu_Product" Relationship="Self.FK_Menu_Product_Product" FromRole="Product" ToRole="Menu_Product" />
           <NavigationProperty Name="Order_Product" Relationship="Self.FK_Order_Product_Product" FromRole="Product" ToRole="Order_Product" />
-          <NavigationProperty Name="Menus" Relationship="Self.Menu_Product" FromRole="Product" ToRole="Menu" />
           <NavigationProperty Name="Allergens" Relationship="Self.Product_Allergen" FromRole="Product" ToRole="Allergen" />
         </EntityType>
         <EntityType Name="User">
@@ -404,6 +411,18 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Role" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Self.FK_Order_User" FromRole="User" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Menu_Product">
+          <Key>
+            <PropertyRef Name="Menu_ID" />
+            <PropertyRef Name="Product_ID" />
+            <PropertyRef Name="Quantity" />
+          </Key>
+          <Property Name="Menu_ID" Type="Int32" Nullable="false" />
+          <Property Name="Product_ID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_Menu_Product_Menu" FromRole="Menu_Product" ToRole="Menu" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Menu_Product_Product" FromRole="Menu_Product" ToRole="Product" />
         </EntityType>
         <EntityType Name="Order_Product">
           <Key>
@@ -453,6 +472,18 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Menu_Product_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Menu_Product" Type="Self.Menu_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Menu_ID" />
+            </Principal>
+            <Dependent Role="Menu_Product">
+              <PropertyRef Name="Menu_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_Product_Order">
           <End Role="Order" Type="Self.Order" Multiplicity="1" />
           <End Role="Order_Product" Type="Self.Order_Product" Multiplicity="*" />
@@ -477,6 +508,18 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Menu_Product_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Menu_Product" Type="Self.Menu_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Menu_Product">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_Product_Product">
           <End Role="Product" Type="Self.Product" Multiplicity="1" />
           <End Role="Order_Product" Type="Self.Order_Product" Multiplicity="*" />
@@ -488,10 +531,6 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
               <PropertyRef Name="Product_ID" />
             </Dependent>
           </ReferentialConstraint>
-        </Association>
-        <Association Name="Menu_Product">
-          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
-          <End Role="Product" Type="Self.Product" Multiplicity="*" />
         </Association>
         <Association Name="Order_Menu">
           <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
@@ -508,6 +547,7 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Menu_Product" EntityType="Self.Menu_Product" />
           <EntitySet Name="Order_Product" EntityType="Self.Order_Product" />
           <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
             <End Role="Category" EntitySet="Categories" />
@@ -521,6 +561,10 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
+          <AssociationSet Name="FK_Menu_Product_Menu" Association="Self.FK_Menu_Product_Menu">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Menu_Product" EntitySet="Menu_Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_Product_Order" Association="Self.FK_Order_Product_Order">
             <End Role="Order" EntitySet="Orders" />
             <End Role="Order_Product" EntitySet="Order_Product" />
@@ -529,13 +573,13 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
             <End Role="User" EntitySet="Users" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
+          <AssociationSet Name="FK_Menu_Product_Product" Association="Self.FK_Menu_Product_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Menu_Product" EntitySet="Menu_Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_Product_Product" Association="Self.FK_Order_Product_Product">
             <End Role="Product" EntitySet="Products" />
             <End Role="Order_Product" EntitySet="Order_Product" />
-          </AssociationSet>
-          <AssociationSet Name="Menu_Product" Association="Self.Menu_Product">
-            <End Role="Menu" EntitySet="Menus" />
-            <End Role="Product" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="Order_Menu" Association="Self.Order_Menu">
             <End Role="Menu" EntitySet="Menus" />
@@ -551,9 +595,9 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="RestaurantModelStoreContainer" CdmEntityContainer="RestaurantEntities">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="RestaurantEntities">
           <EntitySetMapping Name="Allergens">
-            <EntityTypeMapping TypeName="RestaurantModel.Allergen">
+            <EntityTypeMapping TypeName="Models.Allergen">
               <MappingFragment StoreEntitySet="Allergen">
                 <ScalarProperty Name="Allergen_ID" ColumnName="Allergen_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -561,7 +605,7 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="RestaurantModel.Category">
+            <EntityTypeMapping TypeName="Models.Category">
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -569,17 +613,18 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Menus">
-            <EntityTypeMapping TypeName="RestaurantModel.Menu">
+            <EntityTypeMapping TypeName="Models.Menu">
               <MappingFragment StoreEntitySet="Menu">
                 <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
                 <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Photo1" ColumnName="Photo1" />
+                <ScalarProperty Name="Photo2" ColumnName="Photo2" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="RestaurantModel.Order">
+            <EntityTypeMapping TypeName="Models.Order">
               <MappingFragment StoreEntitySet="Order">
                 <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
@@ -588,20 +633,21 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="RestaurantModel.Product">
+            <EntityTypeMapping TypeName="Models.Product">
               <MappingFragment StoreEntitySet="Product">
                 <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="QuatityInStore" ColumnName="QuatityInStore" />
-                <ScalarProperty Name="Photos" ColumnName="Photos" />
+                <ScalarProperty Name="Photo1" ColumnName="Photo1" />
+                <ScalarProperty Name="Photo2" ColumnName="Photo2" />
                 <ScalarProperty Name="Category_ID" ColumnName="Category_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="RestaurantModel.User">
+            <EntityTypeMapping TypeName="Models.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
@@ -614,8 +660,17 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Menu_Product">
+            <EntityTypeMapping TypeName="Models.Menu_Product">
+              <MappingFragment StoreEntitySet="Menu_Product">
+                <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Order_Product">
-            <EntityTypeMapping TypeName="RestaurantModel.Order_Product">
+            <EntityTypeMapping TypeName="Models.Order_Product">
               <MappingFragment StoreEntitySet="Order_Product">
                 <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
                 <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
@@ -623,15 +678,7 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Menu_Product" TypeName="RestaurantModel.Menu_Product" StoreEntitySet="Menu_Product">
-            <EndProperty Name="Menu">
-              <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
-            </EndProperty>
-            <EndProperty Name="Product">
-              <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Order_Menu" TypeName="RestaurantModel.Order_Menu" StoreEntitySet="Order_Menu">
+          <AssociationSetMapping Name="Order_Menu" TypeName="Models.Order_Menu" StoreEntitySet="Order_Menu">
             <EndProperty Name="Menu">
               <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
             </EndProperty>
@@ -639,7 +686,7 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
               <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="Product_Allergen" TypeName="RestaurantModel.Product_Allergen" StoreEntitySet="Product_Allergen">
+          <AssociationSetMapping Name="Product_Allergen" TypeName="Models.Product_Allergen" StoreEntitySet="Product_Allergen">
             <EndProperty Name="Allergen">
               <ScalarProperty Name="Allergen_ID" ColumnName="Allergen_ID" />
             </EndProperty>

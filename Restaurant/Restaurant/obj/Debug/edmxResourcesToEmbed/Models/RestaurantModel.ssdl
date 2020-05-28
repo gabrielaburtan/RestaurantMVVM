@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="RestaurantModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Allergen">
     <Key>
       <PropertyRef Name="Allergen_ID" />
@@ -21,7 +21,8 @@
     <Property Name="Menu_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Category_ID" Type="int" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Price" Type="real" Nullable="false" />
+    <Property Name="Photo1" Type="image" />
+    <Property Name="Photo2" Type="image" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'Restaurant.dbo.Menu_Product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -29,9 +30,11 @@ warning 6002: The table/view 'Restaurant.dbo.Menu_Product' does not have a prima
     <Key>
       <PropertyRef Name="Menu_ID" />
       <PropertyRef Name="Product_ID" />
+      <PropertyRef Name="Quantity" />
     </Key>
     <Property Name="Menu_ID" Type="int" Nullable="false" />
     <Property Name="Product_ID" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -72,7 +75,8 @@ warning 6002: The table/view 'Restaurant.dbo.Order_Product' does not have a prim
     <Property Name="Price" Type="real" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
     <Property Name="QuatityInStore" Type="int" Nullable="false" />
-    <Property Name="Photos" Type="image" Nullable="false" />
+    <Property Name="Photo1" Type="image" />
+    <Property Name="Photo2" Type="image" />
     <Property Name="Category_ID" Type="int" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
@@ -242,7 +246,7 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="RestaurantModelStoreContainer">
+  <EntityContainer Name="ModelsStoreContainer">
     <EntitySet Name="Allergen" EntityType="Self.Allergen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
@@ -252,7 +256,8 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
     <EntitySet Name="Menu_Product" EntityType="Self.Menu_Product" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Menu_Product].[Menu_ID] AS [Menu_ID], 
-    [Menu_Product].[Product_ID] AS [Product_ID]
+    [Menu_Product].[Product_ID] AS [Product_ID], 
+    [Menu_Product].[Quantity] AS [Quantity]
     FROM [dbo].[Menu_Product] AS [Menu_Product]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="Order_Menu" EntityType="Self.Order_Menu" store:Type="Tables" store:Schema="dbo">

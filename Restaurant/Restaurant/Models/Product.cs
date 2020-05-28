@@ -17,8 +17,8 @@ namespace Restaurant.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
+            this.Menu_Product = new HashSet<Menu_Product>();
             this.Order_Product = new HashSet<Order_Product>();
-            this.Menus = new HashSet<Menu>();
             this.Allergens = new HashSet<Allergen>();
         }
     
@@ -27,14 +27,15 @@ namespace Restaurant.Models
         public float Price { get; set; }
         public int Quantity { get; set; }
         public int QuatityInStore { get; set; }
-        public byte[] Photos { get; set; }
+        public byte[] Photo1 { get; set; }
+        public byte[] Photo2 { get; set; }
         public int Category_ID { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order_Product> Order_Product { get; set; }
+        public virtual ICollection<Menu_Product> Menu_Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Menu> Menus { get; set; }
+        public virtual ICollection<Order_Product> Order_Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Allergen> Allergens { get; set; }
     }

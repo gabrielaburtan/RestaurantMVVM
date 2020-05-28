@@ -62,6 +62,7 @@
 
                 <Trigger Property="IsFocused" Value="True">
                     <Setter Property="Background" Value="#ffb5a7"/>
+                    <Setter Property="Text" Value=""/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type TextBox}">
@@ -114,15 +115,16 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="93*"/>
-            <RowDefinition Height="68*"/>
-            <RowDefinition Height="72*"/>
-            <RowDefinition Height="72*"/>
-            <RowDefinition Height="72*"/>
-            <RowDefinition Height="72*"/>
-            <RowDefinition Height="72*"/>
-            <RowDefinition Height="58*"/>
-            <RowDefinition Height="40*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="60*"/>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="30*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="95*"/>
@@ -133,27 +135,29 @@
         <Rectangle Grid.ColumnSpan="2" Grid.Row="1" Fill="#ffb5a7"></Rectangle>
         <Label Grid.ColumnSpan="2" Content="Creeaza cont" HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"
-               FontSize="30" FontFamily="Lucida Calligraphy" Height="48" Width="286" Margin="78,10" Grid.Row="1"/>
+               FontSize="30" FontFamily="Lucida Calligraphy" Height="48" Width="286" Margin="78,6" Grid.Row="1"/>
         <Label Grid.Row="2" Grid.Column="0" Content="Nume:" VerticalAlignment="Center" HorizontalAlignment="Center"
-               FontSize="20" FontFamily="Lucida Calligraphy" Height="40" Width="100" HorizontalContentAlignment="Center" Margin="45,15,45,17"/>
+               FontSize="20" FontFamily="Lucida Calligraphy" Height="44" Width="100" HorizontalContentAlignment="Center" Margin="45,20,45,0"/>
         <Label Grid.Row="3" Grid.Column="0" Content="Prenume:" FontSize="20" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center"
-               VerticalAlignment="Top" Height="39" Width="130" HorizontalContentAlignment="Center" Margin="30,10,30,0"/>
+               VerticalAlignment="Top" Height="41" Width="130" HorizontalContentAlignment="Center" Margin="30,20,30,10"/>
         <Label Grid.Row="4" Grid.Column="0" Content="Email:" FontSize="20" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center"
-               VerticalAlignment="Center" Height="39" HorizontalContentAlignment="Center" Width="130" Margin="30,10,30,23"/>
+               VerticalAlignment="Center" Height="41" HorizontalContentAlignment="Center" Width="130" Margin="30,20,30,10"/>
         <Label Grid.Row="5" Grid.Column="0" Content="Parola:" FontSize="20" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center"
-               VerticalAlignment="Center" Height="39" HorizontalContentAlignment="Center" Width="130" Margin="30,10,30,23"/>
-        <Label Grid.Row="6" Grid.Column="0" Content="Confirma&#xa;  parola:" FontSize="20" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center"
-               VerticalAlignment="Center" Height="72" HorizontalContentAlignment="Center" Width="130" Margin="30,0"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="0,20,30,20" Style="{StaticResource RoundedTextBoxStyle}"/>
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="0,15,30,25" Style="{StaticResource RoundedTextBoxStyle}"/>
-        <TextBox Grid.Row="4" Grid.Column="1" Margin="0,15,30,25" Style="{StaticResource RoundedTextBoxStyle}"/>
-        <PasswordBox Grid.Row="5" Grid.Column="1" Margin="0,15,30,25" Style="{StaticResource RoundedPasswordBoxStyle}"/>
-        <PasswordBox Grid.Row="6" Grid.Column="1" Margin="0,15,30,25" Style="{StaticResource RoundedPasswordBoxStyle}"/>
+               VerticalAlignment="Center" Height="41" HorizontalContentAlignment="Center" Width="130" Margin="30,20,30,10"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="0,20,30,10" Style="{StaticResource RoundedTextBoxStyle}" Text="{Binding LastNameProperty}"/>
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="0,20,30,10" Style="{StaticResource RoundedTextBoxStyle}" Text="{Binding FirstNameProperty}"/>
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="0,20,30,10" Style="{StaticResource RoundedTextBoxStyle}" Text="{Binding EmailProperty}"/>
+        <PasswordBox x:Name="passwordBox" Grid.Row="5" Grid.Column="1" Margin="0,20,30,10" Style="{StaticResource RoundedPasswordBoxStyle}"/>
         <Rectangle Grid.ColumnSpan="2" Grid.Row="7" Fill="#f8edeb"></Rectangle>
-        <Button Grid.ColumnSpan="2" Grid.Row="7" Style="{StaticResource RoundedButtonStyle}" Content="Creeaza cont"
-                FontFamily="Lucida Calligraphy" FontSize="20" Margin="130,15,130,10"/>
-        <Rectangle Grid.ColumnSpan="2" Grid.Row="8" Fill="#f8edeb"></Rectangle>
-        <Button Grid.Column="0" Grid.Row="8" Width="50" HorizontalAlignment="Left" Margin="10,2,0,5"
+        <Label Grid.Row="6" Grid.Column="0" Content="Adresa:" FontSize="20" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Height="36" HorizontalContentAlignment="Center" Width="130" Margin="30,20,30,10"/>
+        <Label Grid.Row="7" Grid.Column="0" Content="Telefon:" FontSize="20" FontFamily="Lucida Calligraphy" HorizontalAlignment="Center"
+               VerticalAlignment="Center" Height="36" HorizontalContentAlignment="Center" Width="130" Margin="30,20,30,10"/>
+        <Button Grid.ColumnSpan="2" Grid.Row="8" Style="{StaticResource RoundedButtonStyle}" Content="Creeaza cont"
+                FontFamily="Lucida Calligraphy" FontSize="20" Margin="130,0" Command="{Binding SignUpCommand}" CommandParameter="{Binding ElementName=passwordBox}"/>
+        <TextBox Grid.Row="6" Grid.Column="1" Margin="0,20,30,10" Style="{StaticResource RoundedTextBoxStyle}" Text="{Binding AddressProperty}"/>
+        <TextBox  Grid.Row="7" Grid.Column="1" Margin="0,20,30,10" Style="{StaticResource RoundedTextBoxStyle}" Text="{Binding PhoneNumber}" MaxLength="10"/>
+        <Button Grid.Column="0" Grid.Row="9" Width="50" HorizontalAlignment="Left" Margin="10,2,0,5"
                 Style="{StaticResource RoundedButtonStyle}" FontSize="20" Command="{Binding BackCommand}">
             <Image Source="../Resources/Images/back-icon.png" Width="82"></Image>
         </Button>

@@ -17,18 +17,19 @@ namespace Restaurant.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Menu()
         {
-            this.Products = new HashSet<Product>();
+            this.Menu_Product = new HashSet<Menu_Product>();
             this.Orders = new HashSet<Order>();
         }
     
         public int Menu_ID { get; set; }
         public int Category_ID { get; set; }
         public string Name { get; set; }
-        public float Price { get; set; }
+        public byte[] Photo1 { get; set; }
+        public byte[] Photo2 { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Menu_Product> Menu_Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
     }

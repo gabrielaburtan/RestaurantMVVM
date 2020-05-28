@@ -31,6 +31,7 @@ namespace Restaurant.Models
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Menu_Product> Menu_Product { get; set; }
         public virtual DbSet<Order_Product> Order_Product { get; set; }
     }
 }
