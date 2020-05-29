@@ -251,5 +251,11 @@
       <End Role="Allergen" EntitySet="Allergens" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
+    <FunctionImport Name="GetQuantityFromProductsForMenu" ReturnType="Collection(Int32)">
+      <Parameter Name="MenuName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetPriceFromProductsForMenu" ReturnType="Collection(Double)">
+      <Parameter Name="MenuName" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
 </Schema>

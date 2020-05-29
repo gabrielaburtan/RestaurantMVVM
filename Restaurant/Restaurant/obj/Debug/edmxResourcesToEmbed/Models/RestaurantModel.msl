@@ -99,5 +99,7 @@
         <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="GetQuantityFromProductsForMenu" FunctionName="Models.Store.GetQuantityFromProductsForMenu" />
+    <FunctionImportMapping FunctionImportName="GetPriceFromProductsForMenu" FunctionName="Models.Store.GetPriceFromProductsForMenu" />
   </EntityContainerMapping>
 </Mapping>

@@ -12,6 +12,8 @@ namespace Restaurant.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class RestaurantEntities : DbContext
     {
@@ -33,5 +35,23 @@ namespace Restaurant.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Menu_Product> Menu_Product { get; set; }
         public virtual DbSet<Order_Product> Order_Product { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> GetQuantityFromProductsForMenu(string menuName)
+        {
+            var menuNameParameter = menuName != null ?
+                new ObjectParameter("MenuName", menuName) :
+                new ObjectParameter("MenuName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetQuantityFromProductsForMenu", menuNameParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<double>> GetPriceFromProductsForMenu(string menuName)
+        {
+            var menuNameParameter = menuName != null ?
+                new ObjectParameter("MenuName", menuName) :
+                new ObjectParameter("MenuName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("GetPriceFromProductsForMenu", menuNameParameter);
+        }
     }
 }

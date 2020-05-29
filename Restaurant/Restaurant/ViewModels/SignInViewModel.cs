@@ -88,7 +88,7 @@ namespace Restaurant.ViewModels
                 }
                 else
                 {
-                    MenuView menu = new MenuView();
+                    MenuForAccount menu = new MenuForAccount();
                     App.Current.MainWindow.Close();
                     App.Current.MainWindow = menu;
                     menu.Show();

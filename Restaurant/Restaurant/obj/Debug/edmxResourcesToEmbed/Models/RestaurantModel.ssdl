@@ -246,6 +246,12 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="GetPriceFromProductsForMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MenuName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetQuantityFromProductsForMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MenuName" Type="nvarchar" Mode="In" />
+  </Function>
   <EntityContainer Name="ModelsStoreContainer">
     <EntitySet Name="Allergen" EntityType="Self.Allergen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />

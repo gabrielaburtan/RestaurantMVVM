@@ -31,3 +31,7 @@ D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Restaurant.
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Restaurant.exe
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Restaurant.pdb
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\bin\Debug\Restaurant.pdb
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\MenuForAccount.g.cs
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\MenuForAccount.baml
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\ProductDetailsView.g.cs
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\ProductDetailsView.baml
