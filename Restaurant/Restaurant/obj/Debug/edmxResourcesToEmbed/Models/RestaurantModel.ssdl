@@ -246,8 +246,26 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="GetAllergensFromMenus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MenuName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetAllergensFromProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetMenusByAllergen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AllergenName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetMenusWithoutSpecificAllergen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AllergenName" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="GetPriceFromProductsForMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MenuName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetProductsByAllergen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AllergenName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="GetProductsWithoutSpecificAllergen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="AllergenName" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="GetQuantityFromProductsForMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MenuName" Type="nvarchar" Mode="In" />

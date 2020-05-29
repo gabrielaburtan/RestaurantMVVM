@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant.Views"
         mc:Ignorable="d"
-        Title="ProductDetailsView" Height="450" Width="800">
+        Title="Detalii despre produs" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="#f8edeb">
     <Grid>
         
     </Grid>

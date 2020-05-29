@@ -17,11 +17,13 @@ namespace Restaurant.Models.EntityLayer
 
         public string CategoryName { get; set; }
 
-        public float Price { get; set; }
+        public double Price { get; set; }
 
         public int Quantity { get; set; }
 
         public ProductType ProductTypeProperty { get; set; }
+
+        public List<string> Allergens { get; set; }
 
     }
 }

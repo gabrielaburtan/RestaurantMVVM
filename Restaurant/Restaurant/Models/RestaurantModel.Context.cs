@@ -36,13 +36,40 @@ namespace Restaurant.Models
         public virtual DbSet<Menu_Product> Menu_Product { get; set; }
         public virtual DbSet<Order_Product> Order_Product { get; set; }
     
-        public virtual ObjectResult<Nullable<int>> GetQuantityFromProductsForMenu(string menuName)
+        public virtual ObjectResult<string> GetAllergensFromMenus(string menuName)
         {
             var menuNameParameter = menuName != null ?
                 new ObjectParameter("MenuName", menuName) :
                 new ObjectParameter("MenuName", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetQuantityFromProductsForMenu", menuNameParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetAllergensFromMenus", menuNameParameter);
+        }
+    
+        public virtual ObjectResult<string> GetAllergensFromProduct(string productName)
+        {
+            var productNameParameter = productName != null ?
+                new ObjectParameter("ProductName", productName) :
+                new ObjectParameter("ProductName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetAllergensFromProduct", productNameParameter);
+        }
+    
+        public virtual ObjectResult<GetMenusByAllergen_Result> GetMenusByAllergen(string allergenName)
+        {
+            var allergenNameParameter = allergenName != null ?
+                new ObjectParameter("AllergenName", allergenName) :
+                new ObjectParameter("AllergenName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMenusByAllergen_Result>("GetMenusByAllergen", allergenNameParameter);
+        }
+    
+        public virtual ObjectResult<GetMenusWithoutSpecificAllergen_Result> GetMenusWithoutSpecificAllergen(string allergenName)
+        {
+            var allergenNameParameter = allergenName != null ?
+                new ObjectParameter("AllergenName", allergenName) :
+                new ObjectParameter("AllergenName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMenusWithoutSpecificAllergen_Result>("GetMenusWithoutSpecificAllergen", allergenNameParameter);
         }
     
         public virtual ObjectResult<Nullable<double>> GetPriceFromProductsForMenu(string menuName)
@@ -52,6 +79,33 @@ namespace Restaurant.Models
                 new ObjectParameter("MenuName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("GetPriceFromProductsForMenu", menuNameParameter);
+        }
+    
+        public virtual ObjectResult<GetProductsByAllergen_Result> GetProductsByAllergen(string allergenName)
+        {
+            var allergenNameParameter = allergenName != null ?
+                new ObjectParameter("AllergenName", allergenName) :
+                new ObjectParameter("AllergenName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProductsByAllergen_Result>("GetProductsByAllergen", allergenNameParameter);
+        }
+    
+        public virtual ObjectResult<GetProductsWithoutSpecificAllergen_Result> GetProductsWithoutSpecificAllergen(string allergenName)
+        {
+            var allergenNameParameter = allergenName != null ?
+                new ObjectParameter("AllergenName", allergenName) :
+                new ObjectParameter("AllergenName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProductsWithoutSpecificAllergen_Result>("GetProductsWithoutSpecificAllergen", allergenNameParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> GetQuantityFromProductsForMenu(string menuName)
+        {
+            var menuNameParameter = menuName != null ?
+                new ObjectParameter("MenuName", menuName) :
+                new ObjectParameter("MenuName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetQuantityFromProductsForMenu", menuNameParameter);
         }
     }
 }

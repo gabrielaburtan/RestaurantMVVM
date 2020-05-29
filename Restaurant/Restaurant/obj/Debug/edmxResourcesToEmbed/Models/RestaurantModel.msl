@@ -99,7 +99,51 @@
         <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="GetQuantityFromProductsForMenu" FunctionName="Models.Store.GetQuantityFromProductsForMenu" />
+    <FunctionImportMapping FunctionImportName="GetAllergensFromMenus" FunctionName="Models.Store.GetAllergensFromMenus" />
+    <FunctionImportMapping FunctionImportName="GetAllergensFromProduct" FunctionName="Models.Store.GetAllergensFromProduct" />
+    <FunctionImportMapping FunctionImportName="GetMenusByAllergen" FunctionName="Models.Store.GetMenusByAllergen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.GetMenusByAllergen_Result">
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetMenusWithoutSpecificAllergen" FunctionName="Models.Store.GetMenusWithoutSpecificAllergen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.GetMenusWithoutSpecificAllergen_Result">
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="GetPriceFromProductsForMenu" FunctionName="Models.Store.GetPriceFromProductsForMenu" />
+    <FunctionImportMapping FunctionImportName="GetProductsByAllergen" FunctionName="Models.Store.GetProductsByAllergen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.GetProductsByAllergen_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="QuatityInStore" ColumnName="QuatityInStore" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetProductsWithoutSpecificAllergen" FunctionName="Models.Store.GetProductsWithoutSpecificAllergen">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="Models.GetProductsWithoutSpecificAllergen_Result">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="QuatityInStore" ColumnName="QuatityInStore" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetQuantityFromProductsForMenu" FunctionName="Models.Store.GetQuantityFromProductsForMenu" />
   </EntityContainerMapping>
 </Mapping>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Allergen">
           <Key>
             <PropertyRef Name="Allergen_ID" />
@@ -251,8 +251,26 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetAllergensFromMenus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MenuName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetAllergensFromProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetMenusByAllergen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AllergenName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetMenusWithoutSpecificAllergen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AllergenName" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="GetPriceFromProductsForMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MenuName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetProductsByAllergen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AllergenName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetProductsWithoutSpecificAllergen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AllergenName" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetQuantityFromProductsForMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MenuName" Type="nvarchar" Mode="In" />
@@ -339,7 +357,8 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -594,13 +613,57 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
             <End Role="Allergen" EntitySet="Allergens" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <FunctionImport Name="GetQuantityFromProductsForMenu" ReturnType="Collection(Int32)">
-          <Parameter Name="MenuName" Mode="In" Type="String" />
+          <FunctionImport Name="GetAllergensFromMenus" ReturnType="Collection(String)">
+            <Parameter Name="MenuName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllergensFromProduct" ReturnType="Collection(String)">
+            <Parameter Name="ProductName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetMenusByAllergen" ReturnType="Collection(Models.GetMenusByAllergen_Result)">
+            <Parameter Name="AllergenName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetMenusWithoutSpecificAllergen" ReturnType="Collection(Models.GetMenusWithoutSpecificAllergen_Result)">
+            <Parameter Name="AllergenName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetPriceFromProductsForMenu" ReturnType="Collection(Double)">
             <Parameter Name="MenuName" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetProductsByAllergen" ReturnType="Collection(Models.GetProductsByAllergen_Result)">
+            <Parameter Name="AllergenName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetProductsWithoutSpecificAllergen" ReturnType="Collection(Models.GetProductsWithoutSpecificAllergen_Result)">
+            <Parameter Name="AllergenName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetQuantityFromProductsForMenu" ReturnType="Collection(Int32)">
+            <Parameter Name="MenuName" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="GetMenusByAllergen_Result">
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetMenusWithoutSpecificAllergen_Result">
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetProductsByAllergen_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Single" Name="Price" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Int32" Name="QuatityInStore" Nullable="false" />
+          <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetProductsWithoutSpecificAllergen_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Single" Name="Price" Nullable="false" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Int32" Name="QuatityInStore" Nullable="false" />
+          <Property Type="String" Name="CategoryName" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -705,8 +768,52 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
               <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="GetQuantityFromProductsForMenu" FunctionName="Models.Store.GetQuantityFromProductsForMenu" />
+          <FunctionImportMapping FunctionImportName="GetAllergensFromMenus" FunctionName="Models.Store.GetAllergensFromMenus" />
+          <FunctionImportMapping FunctionImportName="GetAllergensFromProduct" FunctionName="Models.Store.GetAllergensFromProduct" />
+          <FunctionImportMapping FunctionImportName="GetMenusByAllergen" FunctionName="Models.Store.GetMenusByAllergen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.GetMenusByAllergen_Result">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMenusWithoutSpecificAllergen" FunctionName="Models.Store.GetMenusWithoutSpecificAllergen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.GetMenusWithoutSpecificAllergen_Result">
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetPriceFromProductsForMenu" FunctionName="Models.Store.GetPriceFromProductsForMenu" />
+          <FunctionImportMapping FunctionImportName="GetProductsByAllergen" FunctionName="Models.Store.GetProductsByAllergen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.GetProductsByAllergen_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="QuatityInStore" ColumnName="QuatityInStore" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetProductsWithoutSpecificAllergen" FunctionName="Models.Store.GetProductsWithoutSpecificAllergen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Models.GetProductsWithoutSpecificAllergen_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="QuatityInStore" ColumnName="QuatityInStore" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetQuantityFromProductsForMenu" FunctionName="Models.Store.GetQuantityFromProductsForMenu" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

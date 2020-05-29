@@ -19,6 +19,7 @@ namespace Restaurant.ViewModels
     {
         private ObservableCollection<DisplayProduct> products;
         private MealLogic mealLogic = new MealLogic();
+        
 
         public ObservableCollection<DisplayProduct> ProductsCollection
         {
@@ -121,6 +122,54 @@ namespace Restaurant.ViewModels
         {
             ProductsCollection = new ObservableCollection<DisplayProduct>(mealLogic.GetProductsMenusByCategory((param as Button).Content.ToString()));
         }
+        #endregion
+
+        #region SearchCommand
+        private ICommand searchCommand;
+        public ICommand SearchCommand
+        {
+            get
+            {
+                if(searchCommand == null)
+                {
+                    searchCommand = new RelayCommand(SearchMethod);
+                }
+                return searchCommand;
+            }
+        }
+        private void SearchMethod(object param)
+        {
+            SearchView searchView = new SearchView();
+            App.Current.MainWindow.Close();
+            App.Current.MainWindow = searchView;
+            searchView.Show();
+        }
+        #endregion
+
+        #region CreateAccountCommand
+        private ICommand accountCommand;
+        public ICommand AccountCommand
+        {
+            get
+            {
+                if(accountCommand == null)
+                {
+                    accountCommand = new RelayCommand(AccountMethod);
+                }
+                return accountCommand;
+            }
+        }
+        private void AccountMethod(object param)
+        {
+            SignUpView signUp = new SignUpView();
+            App.Current.MainWindow.Close();
+            App.Current.MainWindow = signUp;
+            signUp.Show();
+        }
+        #endregion
+
+        #region SearchCommand
+
         #endregion
     }
 }
