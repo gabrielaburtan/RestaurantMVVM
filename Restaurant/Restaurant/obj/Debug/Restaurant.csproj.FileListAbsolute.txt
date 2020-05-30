@@ -37,3 +37,5 @@ D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\Produ
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\ProductDetailsView.baml
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\SearchView.g.cs
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\SearchView.baml
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\SeeCartView.g.cs
+D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\obj\Debug\Views\SeeCartView.baml

@@ -144,9 +144,10 @@
         <StackPanel Grid.Row="4" Orientation="Horizontal">
             <Button Content="🔍Cauta produs/alergen" Style="{StaticResource RoundedButtonStyle}" FontFamily="Lucida Calligraphy" Margin="7,5,0,5" Width="200" FontSize="15" Command="{Binding SearchCommand}"/>
 
-            <Button Content="🛒 Adauga in cos 🛒" Style="{StaticResource RoundedButtonStyle}" FontFamily="Lucida Calligraphy" Margin="20,5,0,5" Width="210" FontSize="15"/>
+            <Button Content="🛒 Adauga in cos 🛒" Style="{StaticResource RoundedButtonStyle}" FontFamily="Lucida Calligraphy" Margin="20,5,0,5" Width="210" FontSize="15"
+                    Command="{Binding AddToCartCommand}"/>
 
-            <Button Content="🛒 Vezi cosul 🛒" Style="{StaticResource RoundedButtonStyle}" FontFamily="Lucida Calligraphy" Margin="20,5,0,5" Width="210" FontSize="15"/>
+            <Button Content="🛒 Vezi cosul 🛒" Style="{StaticResource RoundedButtonStyle}" FontFamily="Lucida Calligraphy" Margin="20,5,0,5" Width="210" FontSize="15" Command="{Binding SeeCartCommand}"/>
 
             <Button Content="❃Vezi detalii produs❃" Style="{StaticResource RoundedButtonStyle}" FontFamily="Lucida Calligraphy" Margin="20,5,10,5" Width="190" FontSize="15" Command="{Binding DetailsCommand}"/>
         </StackPanel>

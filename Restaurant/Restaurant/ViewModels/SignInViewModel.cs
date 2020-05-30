@@ -24,21 +24,23 @@ namespace Restaurant.ViewModels
             //try
             //{
 
-            //    var productQuery = (from product in restaurant.Products
-            //                 select product).ToList();
+                //    var productQuery = (from product in restaurant.Products
+                //                 select product).ToList();
 
-            //    int index = 0;
-            //    foreach (var product in productQuery)
-            //    {
-            //        product.Photo1 = converter.Convert(converter.images[index++]);
-            //        product.Photo2 = converter.Convert(converter.images[index++]);
-            //        restaurant.Products.Attach(product);
-            //        restaurant.Entry(product).Property(x => x.Photo1).IsModified = true;
-            //        restaurant.Entry(product).Property(x => x.Photo2).IsModified = true;
-            //    }
+                //    int index = 0;
+                //    foreach (var product in productQuery)
+                //    {
+                //        product.Photo1 = converter.Convert(converter.images[index++]);
+                //        product.Photo2 = converter.Convert(converter.images[index++]);
+                //        restaurant.Products.Attach(product);
+                //        restaurant.Entry(product).Property(x => x.Photo1).IsModified = true;
+                //        restaurant.Entry(product).Property(x => x.Photo2).IsModified = true;
+                //    }
+
+            //    int index = 84;
 
             //    var menuQuery = (from menu in restaurant.Menus
-            //                 select menu).ToList();
+            //                     select menu).ToList();
 
             //    foreach (var menu in menuQuery)
             //    {
@@ -56,6 +58,7 @@ namespace Restaurant.ViewModels
             //    MessageBox.Show("Error");
             //}
         }
+
 
         #region BackCommand
         private ICommand backCommand;
@@ -128,10 +131,10 @@ namespace Restaurant.ViewModels
                 else
                 {
                     StartWindowViewModel.stateUser = true;
-                    MenuForAccount menu = new MenuForAccount();
+                    CustomerAccountView customerView = new CustomerAccountView();
                     App.Current.MainWindow.Close();
-                    App.Current.MainWindow = menu;
-                    menu.Show();
+                    App.Current.MainWindow = customerView;
+                    customerView.Show();
                 }
             }
         }

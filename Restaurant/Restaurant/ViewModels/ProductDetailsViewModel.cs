@@ -23,16 +23,30 @@ namespace Restaurant.ViewModels
             }
         }
 
+        private bool productType = false;
         public string Category
         {
             get
             {
-                var query = (from category in restaurant.Categories
-                             join product in restaurant.Products
-                             on selectedProduct.Name equals product.Name
-                             where category.Category_ID.Equals(product.Category_ID)
-                             select category.Name).First();
-                return query.ToString();
+                try
+                {
+                    var productQuery = (from category in restaurant.Categories
+                                        join product in restaurant.Products
+                                        on selectedProduct.Name equals product.Name
+                                        where category.Category_ID.Equals(product.Category_ID)
+                                        select category.Name).First();
+                    productType = true;
+                    return productQuery.ToString();                   
+                }
+                catch
+                {
+                    var menuQuery = (from category in restaurant.Categories
+                                     join menu in restaurant.Menus
+                                     on selectedProduct.Name equals menu.Name
+                                     where category.Category_ID.Equals(menu.Category_ID)
+                                     select category.Name).First();
+                    return menuQuery.ToString();
+                }
             }
         }
 
@@ -48,7 +62,7 @@ namespace Restaurant.ViewModels
         {
             get
             {
-                if(Category == "Ciorbe" || Category == "Bauturi")
+                if (Category == "Ciorbe" || Category == "Bauturi")
                 {
                     return MenuViewModel.choosedProduct.Quantity.ToString() + " ML";
                 }
@@ -64,15 +78,30 @@ namespace Restaurant.ViewModels
             get
             {
                 string result = "";
-                var query = restaurant.GetAllergensFromProduct(selectedProduct.Name);
-                foreach(var allergen in query)
+
+                if (productType == true)
                 {
-                    result = result + allergen.ToString() + " ";
+                    var query = restaurant.GetAllergensFromProduct(selectedProduct.Name);
+                    foreach (var allergen in query)
+                    {
+                        result = result + allergen.ToString() + " ";
+                    }
                 }
-                if(result == "")
+
+                else
+                {
+                    var query = restaurant.GetAllergensFromMenus(selectedProduct.Name);
+                    foreach (var allergen in query)
+                    {
+                        result = result + allergen.ToString() + " ";
+                    }
+                }
+
+                if (result == "")
                 {
                     result = "-";
                 }
+
                 return result;
             }
         }
@@ -81,10 +110,20 @@ namespace Restaurant.ViewModels
         {
             get
             {
-                var query = (from product in restaurant.Products
-                             where product.Name.Equals(selectedProduct.Name)
-                             select product.Photo1).First();
-                return query;
+                try
+                {
+                    var productQuery = (from product in restaurant.Products
+                                        where product.Name.Equals(selectedProduct.Name)
+                                        select product.Photo1).First();
+                    return productQuery;
+                }
+                catch
+                {
+                    var menuQuery = (from menu in restaurant.Menus
+                                     where menu.Name.Equals(selectedProduct.Name)
+                                     select menu.Photo1).First();
+                    return menuQuery;
+                }
             }
         }
 
@@ -92,10 +131,20 @@ namespace Restaurant.ViewModels
         {
             get
             {
-                var query = (from product in restaurant.Products
-                             where product.Name.Equals(selectedProduct.Name)
-                             select product.Photo2).First();
-                return query;
+                try
+                {
+                    var productQuery = (from product in restaurant.Products
+                                        where product.Name.Equals(selectedProduct.Name)
+                                        select product.Photo2).First();
+                    return productQuery;
+                }
+                catch
+                {
+                    var menuQuery = (from menu in restaurant.Menus
+                                     where menu.Name.Equals(selectedProduct.Name)
+                                     select menu.Photo2).First();
+                    return menuQuery;
+                }
             }
         }
 
@@ -113,7 +162,7 @@ namespace Restaurant.ViewModels
         }
         private void BackMethod(object param)
         {
-            if(StartWindowViewModel.stateUser == false)
+            if (StartWindowViewModel.stateUser == false)
             {
                 MenuView startWindow = new MenuView();
                 App.Current.MainWindow.Close();

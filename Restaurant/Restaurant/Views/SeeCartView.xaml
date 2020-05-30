@@ -4,9 +4,136 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant.Views"
+        xmlns:ctx="clr-namespace:Restaurant.ViewModels"
         mc:Ignorable="d"
-        Title="SeeCartView" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="#f8edeb">
+        Title="SeeCartView" Height="600" Width="800" WindowStartupLocation="CenterScreen" Background="#f8edeb">
+    <Window.DataContext>
+        <ctx:SeeCartViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <Style x:Key="RoundedBorder" TargetType="Border">
+            <Setter Property="CornerRadius" Value="5"/>
+        </Style>
+        <Style x:Key="RoundedTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="FontWeight" Value="500"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontFamily" Value="Lucida Calligraphy"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Padding" Value="5"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="True">
+                    <Setter Property="Background" Value="#ffb5a7"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                <Border CornerRadius="10,10,10,10" Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="#ffb5a7"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type TextBox}">
+                                <Border Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
+                                    <ScrollViewer x:Name="PART_ContentHost"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="RoundedButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#ffb5a7"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="10,10,10,10" Background="{TemplateBinding Background}" Style="{StaticResource RoundedBorder}">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding  Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"  Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding  VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#f08080"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Background" Value="#f9dcc4"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="113*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="187*"/>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="29*"/>
+        </Grid.RowDefinitions>
+        <Image Source="../Resources/Images/logo1.png" HorizontalAlignment="Left" Margin="-160,-10,0,0" Width="619"/>
+        <Image Source="../Resources/Images/restaurant.png" HorizontalAlignment="Right" Margin="0,10" Width="198"></Image>
+        <Label Grid.Row="0" Content="Cos de cumparaturi" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Lucida Calligraphy"
+               FontSize="30" Height="64" Margin="262,21,203,28" Width="327"/>
+        <Label Grid.Row="1" Content="Preparat" FontSize="20" FontFamily="Lucida Calligraphy" Margin="10,0,500,0"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center"/>
+        <Label Grid.Row="1" Content="Cantitate" FontSize="20" FontFamily="Lucida Calligraphy" Margin="358,0,224,0"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center">
+        </Label>
+        <Label Grid.Row="1" Content="Pret(RON)" FontSize="20" FontFamily="Lucida Calligraphy" Margin="647,0,0,0"
+               HorizontalContentAlignment="Center"
+               VerticalContentAlignment="Center">
+        </Label>
+        <ListView Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ProductsInCart}" SelectedItem="{Binding SelectedProduct}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="1" VerticalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Width="900" Height="50" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                        <Label Width="350" Height="50" Content="{Binding Name}" FontFamily="Lucida Calligraphy" FontSize="12"
+             VerticalContentAlignment="Center"
+             HorizontalContentAlignment="Left"/>
+                        <Label Width="150" Height="50" FontFamily="Lucida Calligraphy" FontSize ="15" 
+             VerticalContentAlignment="Center"
+             HorizontalContentAlignment="Center"
+                               Content="{Binding QuantityInCart}" Margin="30,0,0,0"/>
+                        <Label Width="50" Height="50" FontFamily="Lucida Calligraphy" FontSize="15"
+             VerticalContentAlignment="Center"
+             HorizontalContentAlignment="Center"
+                               Content="{Binding Price}" Margin="150,0,0,0"/>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Button Content="Confirma comanda" Height="38" FontFamily="Lucida Calligraphy"
+                    Style="{StaticResource RoundedButtonStyle}" Margin="44,5,0,0" FontSize="15"/>
+            <Label Width="100" Height="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Lucida Calligraphy" FontSize="20" Content="TOTAL:" Margin="100,0,0,0"/>
+            <Label Width="100" Height="50" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" FontFamily="Lucida Calligraphy" FontSize="20" Content="{Binding Total}" Margin="0,0,0,0"/>
+            <Button Content="Sterge din cos" Height="38" FontFamily="Lucida Calligraphy"
+                    Style="{StaticResource RoundedButtonStyle}" Margin="120,8,0,4" FontSize="15" Width="130"
+                    Command="{Binding DeleteCommand}"/>
+        </StackPanel>
+        <Button Grid.Row="5" Width="40" HorizontalAlignment="Left" Margin="10,5,0,5"
+                Style="{StaticResource RoundedButtonStyle}" FontSize="20" Command="{Binding BackCommand}">
+            <Image Source="../Resources/Images/back-icon.png" Width="82"></Image>
+        </Button>
     </Grid>
 </Window>

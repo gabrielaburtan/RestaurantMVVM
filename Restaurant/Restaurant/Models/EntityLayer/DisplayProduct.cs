@@ -13,6 +13,16 @@ namespace Restaurant.Models.EntityLayer
     }
     public class DisplayProduct
     {
+        public DisplayProduct()
+        {
+
+        }
+        public DisplayProduct(string name, double price, int quantityInCart)
+        {
+            Name = name;
+            Price = price;
+            QuantityInCart = quantityInCart;
+        }
         public string Name { get; set; }
 
         public string CategoryName { get; set; }
@@ -20,6 +30,8 @@ namespace Restaurant.Models.EntityLayer
         public double Price { get; set; }
 
         public int Quantity { get; set; }
+
+        public int QuantityInCart { get; set; }
 
         public ProductType ProductTypeProperty { get; set; }
 

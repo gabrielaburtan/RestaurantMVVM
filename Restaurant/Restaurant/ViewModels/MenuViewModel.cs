@@ -19,7 +19,7 @@ namespace Restaurant.ViewModels
     {
         private ObservableCollection<DisplayProduct> products;
         private MealLogic mealLogic = new MealLogic();
-        
+        public static ObservableCollection<DisplayProduct> productsAddedToCart = new ObservableCollection<DisplayProduct>();
 
         public ObservableCollection<DisplayProduct> ProductsCollection
         {
@@ -170,6 +170,74 @@ namespace Restaurant.ViewModels
         }
         #endregion
 
-        
+        #region SeeCart
+        private ICommand seeCartCommand;
+        public ICommand SeeCartCommand
+        {
+            get
+            {
+                if (seeCartCommand == null)
+                {
+                    seeCartCommand = new RelayCommand(SeeCartMethod);
+                }
+                return seeCartCommand;
+            }
+        }
+        private void SeeCartMethod(object param)
+        {
+            SeeCartView seeCartView = new SeeCartView();
+            App.Current.MainWindow.Close();
+            App.Current.MainWindow = seeCartView;
+            seeCartView.Show();
+        }
+        #endregion
+
+        #region AddToCart
+        private ICommand addToCartCommand;
+        public ICommand AddToCartCommand
+        {
+            get
+            {
+                if (addToCartCommand == null)
+                {
+                    addToCartCommand = new RelayCommand(AddToCartMethod);
+                }
+                return addToCartCommand;
+            }
+        }
+        private void AddToCartMethod(object param)
+        {
+            
+            try
+            {
+                DisplayProduct copySelected = new DisplayProduct(SelectedProduct.Name, SelectedProduct.Price, SelectedProduct.QuantityInCart);
+                copySelected.QuantityInCart = 1;
+                bool exists = false;
+                double initialPrice = copySelected.Price;
+                foreach (var product in productsAddedToCart)
+                {
+                    if (product.Name == copySelected.Name)
+                    {
+                        product.QuantityInCart++;
+                        product.Price = product.QuantityInCart * initialPrice;
+                        exists = true;
+                        MessageBox.Show("Produsul a fost adaugat in cos!");
+                        SelectedProduct = null;
+                    }
+                }
+                if (exists == false)
+                {
+                    productsAddedToCart.Add(copySelected);
+                    MessageBox.Show("Produsul a fost adaugat in cos!");
+                    SelectedProduct = null;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Va rog selectati un produs!")
+;            }
+        }
+        #endregion
+
     }
 }

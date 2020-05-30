@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Restaurant.Views"
+        xmlns:ctx="clr-namespace:Restaurant.ViewModels"
         mc:Ignorable="d"
         Title="La Burtanica" Height="650" Width="450" WindowStartupLocation="CenterScreen" Background="#f8edeb">
+    <Window.DataContext>
+        <ctx:CustomerAccountViewModel/>
+    </Window.DataContext>
     <Window.Resources>
         <Style x:Key="RoundedBorder" TargetType="Border">
             <Setter Property="CornerRadius" Value="5"/>
@@ -47,10 +51,17 @@
         <Image Grid.Row="0" Source="../Resources/Images/logo1.png" Margin="-114,0,-148,0" Grid.ColumnSpan="2"/>
         <Image Grid.Column="0" Source="../Resources/Images/chef3.png" Margin="0,74,0,0" Grid.RowSpan="2"/>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
-            <Button Style="{StaticResource RoundedButtonStyle}" Height="35" Margin="40,100,40,0" Content="Vezi meniul"
+            <Button Style="{StaticResource RoundedButtonStyle}" Height="35" Margin="10,100,10,0" Content="☰ Vezi meniul"
+                    FontFamily="Lucida Calligraphy" FontSize="18" Command="{Binding SeeMenuCommand}"/>
+            <Button Style="{StaticResource RoundedButtonStyle}" Height="35" Margin="10,50,10,0" Content="☰ Comenzi active"
                     FontFamily="Lucida Calligraphy" FontSize="18"/>
-            <Button Style="{StaticResource RoundedButtonStyle}" Height="35" Margin="40,50,40,0" Content="Vezi meniul"
+            <Button Style="{StaticResource RoundedButtonStyle}" Height="35" Margin="10,50,10,0" Content="☰ Istoric comenzi"
                     FontFamily="Lucida Calligraphy" FontSize="18"/>
+            
         </StackPanel>
+        <Button Grid.Row="2" Grid.Column="0" Width="50" HorizontalAlignment="Left" Margin="10,2,0,5"
+                Style="{StaticResource RoundedButtonStyle}" FontSize="20" Command="{Binding BackCommand}" Height="34">
+            <Image Source="../Resources/Images/back-icon.png" Width="82"></Image>
+        </Button>
     </Grid>
 </Window>
