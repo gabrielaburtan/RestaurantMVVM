@@ -40,6 +40,7 @@ namespace Restaurant.ViewModels
         }
 
         #region SelectedProduct
+        public static DisplayProduct choosedProduct;
         private DisplayProduct selectedProduct;
         public DisplayProduct SelectedProduct
         {
@@ -53,6 +54,7 @@ namespace Restaurant.ViewModels
                 if (selectedProduct != null)
                 {
                     CanExecuteDetailsCommand = true;
+                    choosedProduct = selectedProduct;
                 }
                 OnPropertyChanged("SelectedProduct");
             }
@@ -168,8 +170,6 @@ namespace Restaurant.ViewModels
         }
         #endregion
 
-        #region SearchCommand
-
-        #endregion
+        
     }
 }

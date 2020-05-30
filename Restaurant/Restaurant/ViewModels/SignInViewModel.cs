@@ -18,6 +18,45 @@ namespace Restaurant.ViewModels
         RestaurantEntities restaurant = new RestaurantEntities();
         UserLogic user = new UserLogic();
 
+        public SignInViewModel()
+        {
+            //Converter converter = new Converter();
+            //try
+            //{
+
+            //    var productQuery = (from product in restaurant.Products
+            //                 select product).ToList();
+
+            //    int index = 0;
+            //    foreach (var product in productQuery)
+            //    {
+            //        product.Photo1 = converter.Convert(converter.images[index++]);
+            //        product.Photo2 = converter.Convert(converter.images[index++]);
+            //        restaurant.Products.Attach(product);
+            //        restaurant.Entry(product).Property(x => x.Photo1).IsModified = true;
+            //        restaurant.Entry(product).Property(x => x.Photo2).IsModified = true;
+            //    }
+
+            //    var menuQuery = (from menu in restaurant.Menus
+            //                 select menu).ToList();
+
+            //    foreach (var menu in menuQuery)
+            //    {
+            //        menu.Photo1 = converter.Convert(converter.images[index++]);
+            //        menu.Photo2 = converter.Convert(converter.images[index++]);
+            //        restaurant.Menus.Attach(menu);
+            //        restaurant.Entry(menu).Property(x => x.Photo1).IsModified = true;
+            //        restaurant.Entry(menu).Property(x => x.Photo2).IsModified = true;
+            //    }
+
+            //    restaurant.SaveChanges();
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Error");
+            //}
+        }
+
         #region BackCommand
         private ICommand backCommand;
         public ICommand BackCommand
@@ -80,7 +119,7 @@ namespace Restaurant.ViewModels
             }
             else
             {
-                if(!user.SignIn(Email, password))
+                if (!user.SignIn(Email, password))
                 {
                     MessageBox.Show("Email sau parola gresite!");
                     Email = "";
@@ -88,6 +127,7 @@ namespace Restaurant.ViewModels
                 }
                 else
                 {
+                    StartWindowViewModel.stateUser = true;
                     MenuForAccount menu = new MenuForAccount();
                     App.Current.MainWindow.Close();
                     App.Current.MainWindow = menu;

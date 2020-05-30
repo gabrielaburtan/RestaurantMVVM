@@ -1,6 +1,7 @@
 ﻿using Restaurant.Models.EntityLayer;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,10 @@ namespace Restaurant.Models.BussinessLogicLayer
     {
         private RestaurantEntities restaurant = new RestaurantEntities();
 
+        private double MenuPriceWithDiscount(double price)
+        {
+            return price - double.Parse(ConfigurationManager.AppSettings.Get("menuDiscount"))/100 * price;
+        }
         public List<DisplayProduct> GetProductsMenus()
         {
             var productQuery = (from product in restaurant.Products
@@ -63,7 +68,7 @@ namespace Restaurant.Models.BussinessLogicLayer
             foreach (var menu in menuQuery)
             {
                 menu.Quantity = (int)restaurant.GetQuantityFromProductsForMenu(menu.Name).First();
-                menu.Price = (float)restaurant.GetPriceFromProductsForMenu(menu.Name).First();
+                menu.Price = MenuPriceWithDiscount((float)restaurant.GetPriceFromProductsForMenu(menu.Name).First());
             }
 
             productQuery.AddRange(menuQuery);
@@ -237,5 +242,6 @@ namespace Restaurant.Models.BussinessLogicLayer
                 return productQuery;
             }
         }
+
     }
 }

@@ -11,6 +11,7 @@ namespace Restaurant.ViewModels
 {
     class StartWindowViewModel : BaseViewModel
     {
+        public static bool stateUser = false;
         private ICommand signInCommand;
         public ICommand SignInCommand
         {

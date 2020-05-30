@@ -1,6 +1,7 @@
 ﻿using Restaurant.Models.BussinessLogicLayer;
 using Restaurant.Models.EntityLayer;
 using Restaurant.Services;
+using Restaurant.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -91,5 +92,35 @@ namespace Restaurant.ViewModels
                 }
             }
         }
+        private ICommand backCommand;
+        public ICommand BackCommand
+        {
+            get
+            {
+                if (backCommand == null)
+                {
+                    backCommand = new RelayCommand(BackMethod);
+                }
+                return backCommand;
+            }
+        }
+        private void BackMethod(object param)
+        {
+            if (StartWindowViewModel.stateUser == false)
+            {
+                MenuView startWindow = new MenuView();
+                App.Current.MainWindow.Close();
+                App.Current.MainWindow = startWindow;
+                startWindow.Show();
+            }
+            else
+            {
+                MenuForAccount startWindow = new MenuForAccount();
+                App.Current.MainWindow.Close();
+                App.Current.MainWindow = startWindow;
+                startWindow.Show();
+            }
+        }
     }
+    
 }

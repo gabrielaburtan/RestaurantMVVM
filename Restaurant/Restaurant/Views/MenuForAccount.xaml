@@ -107,16 +107,16 @@
         <Label Grid.Row="2" Content="Preparat" FontSize="20" FontFamily="Lucida Calligraphy" Margin="10,0,500,0"
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center"/>
-        <Label Grid.Row="2" Content="Cantitate(gr)" FontSize="20" FontFamily="Lucida Calligraphy" Margin="358,0,224,0"
+        <Label Grid.Row="2" Content="Cantitate(gr/ml)" FontSize="20" FontFamily="Lucida Calligraphy" Margin="358,0,224,0"
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center">
         </Label>
-        <Label Grid.Row="2" Content="Pret" FontSize="20" FontFamily="Lucida Calligraphy" Margin="647,0,0,0"
+        <Label Grid.Row="2" Content="Pret(RON)" FontSize="20" FontFamily="Lucida Calligraphy" Margin="647,0,0,0"
                HorizontalContentAlignment="Center"
                VerticalContentAlignment="Center">
         </Label>
 
-        <ListView Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ProductsCollection}">
+        <ListView Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ItemsSource="{Binding ProductsCollection}" SelectedItem="{Binding SelectedProduct}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="1" VerticalAlignment="Stretch"/>
@@ -148,7 +148,7 @@
 
             <Button Content="🛒 Vezi cosul 🛒" Style="{StaticResource RoundedButtonStyle}" FontFamily="Lucida Calligraphy" Margin="20,5,0,5" Width="210" FontSize="15"/>
 
-            <Button Content="❃Vezi detalii produs❃" Style="{StaticResource RoundedButtonStyle}" FontFamily="Lucida Calligraphy" Margin="20,5,10,5" Width="190" FontSize="15"/>
+            <Button Content="❃Vezi detalii produs❃" Style="{StaticResource RoundedButtonStyle}" FontFamily="Lucida Calligraphy" Margin="20,5,10,5" Width="190" FontSize="15" Command="{Binding DetailsCommand}"/>
         </StackPanel>
         <Button Grid.Row="5" Width="40" HorizontalAlignment="Left" Margin="10,5,0,5"
                 Style="{StaticResource RoundedButtonStyle}" FontSize="20" Command="{Binding BackCommand}">

@@ -25,5 +25,7 @@ namespace Restaurant.Models.EntityLayer
 
         public List<string> Allergens { get; set; }
 
+        public string Category { get; set; }
+
     }
 }
