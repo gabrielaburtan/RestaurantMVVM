@@ -17,6 +17,7 @@ namespace Restaurant.ViewModels
     {
         RestaurantEntities restaurant = new RestaurantEntities();
         UserLogic user = new UserLogic();
+        public static User activeUser = new User();
 
         public SignInViewModel()
         {
@@ -130,6 +131,10 @@ namespace Restaurant.ViewModels
                 }
                 else
                 {
+                    var query = (from user in restaurant.Users
+                                 where user.Email.Equals(Email)
+                                 select user).First();
+                    activeUser = query;
                     StartWindowViewModel.stateUser = true;
                     CustomerAccountView customerView = new CustomerAccountView();
                     App.Current.MainWindow.Close();

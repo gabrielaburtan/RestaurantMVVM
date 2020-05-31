@@ -28,12 +28,43 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Menu_Product">
+      <EntityTypeMapping TypeName="Models.Menu_Product">
+        <MappingFragment StoreEntitySet="Menu_Product">
+          <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+          <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Menu_Product_ID" ColumnName="Menu_Product_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="Models.Order">
         <MappingFragment StoreEntitySet="Order">
           <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
           <ScalarProperty Name="User_ID" ColumnName="User_ID" />
           <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_Menu">
+      <EntityTypeMapping TypeName="Models.Order_Menu">
+        <MappingFragment StoreEntitySet="Order_Menu">
+          <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
+          <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+          <ScalarProperty Name="Order_Menu_ID" ColumnName="Order_Menu_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Order_Product">
+      <EntityTypeMapping TypeName="Models.Order_Product">
+        <MappingFragment StoreEntitySet="Order_Product">
+          <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+          <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Order_Product_ID" ColumnName="Order_Product_ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -51,6 +82,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Product_Allergen">
+      <EntityTypeMapping TypeName="Models.Product_Allergen">
+        <MappingFragment StoreEntitySet="Product_Allergen">
+          <ScalarProperty Name="Allergen_ID" ColumnName="Allergen_ID" />
+          <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+          <ScalarProperty Name="Product_Allergen_ID" ColumnName="Product_Allergen_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="Models.User">
         <MappingFragment StoreEntitySet="User">
@@ -65,40 +105,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Menu_Product">
-      <EntityTypeMapping TypeName="Models.Menu_Product">
-        <MappingFragment StoreEntitySet="Menu_Product">
-          <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
-          <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Order_Product">
-      <EntityTypeMapping TypeName="Models.Order_Product">
-        <MappingFragment StoreEntitySet="Order_Product">
-          <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
-          <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="Order_Menu" TypeName="Models.Order_Menu" StoreEntitySet="Order_Menu">
-      <EndProperty Name="Menu">
-        <ScalarProperty Name="Menu_ID" ColumnName="Menu_ID" />
-      </EndProperty>
-      <EndProperty Name="Order">
-        <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="Product_Allergen" TypeName="Models.Product_Allergen" StoreEntitySet="Product_Allergen">
-      <EndProperty Name="Allergen">
-        <ScalarProperty Name="Allergen_ID" ColumnName="Allergen_ID" />
-      </EndProperty>
-      <EndProperty Name="Product">
-        <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
-      </EndProperty>
-    </AssociationSetMapping>
     <FunctionImportMapping FunctionImportName="GetAllergensFromMenus" FunctionName="Models.Store.GetAllergensFromMenus" />
     <FunctionImportMapping FunctionImportName="GetAllergensFromProduct" FunctionName="Models.Store.GetAllergensFromProduct" />
     <FunctionImportMapping FunctionImportName="GetMenusByAllergen" FunctionName="Models.Store.GetMenusByAllergen">
@@ -145,5 +151,6 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="GetQuantityFromProductsForMenu" FunctionName="Models.Store.GetQuantityFromProductsForMenu" />
+    <FunctionImportMapping FunctionImportName="InsertIntoOrderMenu" FunctionName="Models.Store.InsertIntoOrderMenu" />
   </EntityContainerMapping>
 </Mapping>

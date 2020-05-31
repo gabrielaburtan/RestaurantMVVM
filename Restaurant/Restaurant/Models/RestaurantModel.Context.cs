@@ -30,11 +30,13 @@ namespace Restaurant.Models
         public virtual DbSet<Allergen> Allergens { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Menu_Product> Menu_Product { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Order_Menu> Order_Menu { get; set; }
         public virtual DbSet<Order_Product> Order_Product { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Product_Allergen> Product_Allergen { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     
         public virtual ObjectResult<string> GetAllergensFromMenus(string menuName)
         {
@@ -106,6 +108,19 @@ namespace Restaurant.Models
                 new ObjectParameter("MenuName", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetQuantityFromProductsForMenu", menuNameParameter);
+        }
+    
+        public virtual int InsertIntoOrderMenu(Nullable<int> menuID, Nullable<int> orderID)
+        {
+            var menuIDParameter = menuID.HasValue ?
+                new ObjectParameter("MenuID", menuID) :
+                new ObjectParameter("MenuID", typeof(int));
+    
+            var orderIDParameter = orderID.HasValue ?
+                new ObjectParameter("OrderID", orderID) :
+                new ObjectParameter("OrderID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertIntoOrderMenu", menuIDParameter, orderIDParameter);
         }
     }
 }

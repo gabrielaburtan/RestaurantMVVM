@@ -1,4 +1,5 @@
-﻿using Restaurant.Models.BussinessLogicLayer;
+﻿using Restaurant.Models;
+using Restaurant.Models.BussinessLogicLayer;
 using Restaurant.Services;
 using Restaurant.Views;
 using System;
@@ -15,6 +16,7 @@ namespace Restaurant.ViewModels
 {
     class SignUpViewModel:BaseViewModel
     {
+        RestaurantEntities restaurant = new RestaurantEntities();
         #region Properties
 
         private bool firstNameValidator = false;
@@ -192,7 +194,8 @@ namespace Restaurant.ViewModels
                 }
                 else
                 {
-                    MenuView menu = new MenuView();
+                    StartWindowViewModel.stateUser = true;
+                    MenuForAccount menu = new MenuForAccount();
                     App.Current.MainWindow.Close();
                     App.Current.MainWindow = menu;
                     menu.Show();

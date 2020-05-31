@@ -70,10 +70,12 @@
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BussinessLogicLayer\MealLogic.cs" />
+    <Compile Include="Models\BussinessLogicLayer\OrderLogic.cs" />
     <Compile Include="Models\BussinessLogicLayer\UserLogic.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityLayer\DisplayOrder.cs" />
     <Compile Include="Models\EntityLayer\DisplayProduct.cs" />
     <Compile Include="Models\GetMenusByAllergen_Result.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
@@ -96,10 +98,16 @@
     <Compile Include="Models\Order.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Order_Menu.cs">
+      <DependentUpon>RestaurantModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Order_Product.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs">
+      <DependentUpon>RestaurantModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product_Allergen.cs">
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RestaurantModel.Context.cs">
@@ -121,6 +129,7 @@
       <DependentUpon>RestaurantModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Services\RelayCommand.cs" />
+    <Compile Include="ViewModels\ActiveOrdersViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Converter.cs" />
     <Compile Include="ViewModels\CustomerAccountViewModel.cs" />
@@ -133,6 +142,9 @@
     <Compile Include="ViewModels\SignInViewModel.cs" />
     <Compile Include="ViewModels\SignUpViewModel.cs" />
     <Compile Include="ViewModels\StartWindowViewModel.cs" />
+    <Compile Include="Views\ActiveOrders.xaml.cs">
+      <DependentUpon>ActiveOrders.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CustomerAccountView.xaml.cs">
       <DependentUpon>CustomerAccountView.xaml</DependentUpon>
     </Compile>
@@ -170,6 +182,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ActiveOrders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CustomerAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,16 +292,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\RestaurantModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RestaurantModel.edmx</DependentUpon>
-      <LastGenOutput>RestaurantModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\RestaurantModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RestaurantModel.edmx</DependentUpon>
-      <LastGenOutput>RestaurantModel.cs</LastGenOutput>
-    </Content>
     <Resource Include="Resources\ProductImages\apabucovina1.jpg" />
     <Resource Include="Resources\ProductImages\apabucovina2.jpg" />
     <Resource Include="Resources\ProductImages\apaharghita1.jpg" />
@@ -384,6 +390,18 @@
     <Resource Include="Resources\ProductImages\varzacalita2.jpg" />
     <Resource Include="Resources\ProductImages\zacusca1.jpg" />
     <Resource Include="Resources\ProductImages\zacusca2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\RestaurantModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RestaurantModel.edmx</DependentUpon>
+      <LastGenOutput>RestaurantModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\RestaurantModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RestaurantModel.edmx</DependentUpon>
+      <LastGenOutput>RestaurantModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

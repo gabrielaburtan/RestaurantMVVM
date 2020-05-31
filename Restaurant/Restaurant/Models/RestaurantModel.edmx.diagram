@@ -4,25 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="627350248896470f82221ad1b023b543" Name="Diagram1">
-        <EntityTypeShape EntityType="Models.Allergen" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Menu" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Order" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Product" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.User" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Menu_Product" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Order_Product" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+      <Diagram DiagramId="0be38028f9da4e28801c803c55ee0998" Name="Diagram1">
+        <EntityTypeShape EntityType="Models.Allergen" Width="1.5" PointX="6" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Category" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Menu" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Menu_Product" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Order" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Order_Menu" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Order_Product" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Product" Width="1.5" PointX="3" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Product_Allergen" Width="1.5" PointX="8.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.User" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <AssociationConnector Association="Models.FK_Product_Allergen_Allergen" ManuallyRouted="false" />
         <AssociationConnector Association="Models.FK_Category_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Models.FK_Menu_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Models.FK_Product_Category" ManuallyRouted="false" />
         <AssociationConnector Association="Models.FK_Menu_Product_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_Order_Menu_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_Menu_Product_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_Order_Menu_Order" ManuallyRouted="false" />
         <AssociationConnector Association="Models.FK_Order_Product_Order" ManuallyRouted="false" />
         <AssociationConnector Association="Models.FK_Order_User" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.FK_Menu_Product_Product" ManuallyRouted="false" />
         <AssociationConnector Association="Models.FK_Order_Product_Product" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.Order_Menu" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.Product_Allergen" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_Product_Allergen_Product" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

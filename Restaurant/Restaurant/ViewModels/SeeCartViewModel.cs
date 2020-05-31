@@ -1,4 +1,5 @@
-﻿using Restaurant.Models.EntityLayer;
+﻿using Restaurant.Models.BussinessLogicLayer;
+using Restaurant.Models.EntityLayer;
 using Restaurant.Services;
 using Restaurant.Views;
 using System;
@@ -7,11 +8,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Restaurant.ViewModels
 {
-    class SeeCartViewModel:BaseViewModel
+    class SeeCartViewModel : BaseViewModel
     {
         public SeeCartViewModel()
         {
@@ -117,19 +119,19 @@ namespace Restaurant.ViewModels
         private void DeleteMethod(object param)
         {
             ObservableCollection<DisplayProduct> ProductsInCartCopy = new ObservableCollection<DisplayProduct>();
-            if(SelectedProduct.QuantityInCart > 1)
+            if (SelectedProduct.QuantityInCart > 1)
             {
                 SelectedProduct.QuantityInCart--;
-                foreach(var product in ProductsInCart)
+                foreach (var product in ProductsInCart)
                 {
-                    if(product.Name == SelectedProduct.Name)
+                    if (product.Name == SelectedProduct.Name)
                     {
                         product.QuantityInCart = SelectedProduct.QuantityInCart;
                         product.Price = MenuViewModel.choosedProduct.Price * product.QuantityInCart;
                     }
                     ProductsInCartCopy.Add(product);
                 }
-                ProductsInCart = ProductsInCartCopy;         
+                ProductsInCart = ProductsInCartCopy;
                 OnPropertyChanged("ProductsInCart");
                 Total = 0;
                 foreach (var product in ProductsInCart)
@@ -147,7 +149,42 @@ namespace Restaurant.ViewModels
                     Total += product.Price;
                 }
                 OnPropertyChanged("Total");
-            }          
+            }
+        }
+
+        private ICommand placeOrderCommand;
+        public ICommand PlaceOrderCommand
+        {
+            get
+            {
+                if (placeOrderCommand == null)
+                {
+                    placeOrderCommand = new RelayCommand(PlaceOrderMethod);
+                }
+                return placeOrderCommand;
+            }
+        }
+
+        public void PlaceOrderMethod(object param)
+        {
+            if (ProductsInCart.Count == 0)
+            {
+                MessageBox.Show("Your cart is empty!");
+            }
+            else
+            {
+
+                OrderLogic orderLogic = new OrderLogic();
+                if (orderLogic.AddOrder(productsInCart.ToList(), Total))
+                {
+                    MessageBox.Show("Order placed successfully");
+                }
+                else
+                {
+                    MessageBox.Show("Not enough quantity in store!");
+                }
+
+            }
         }
     }
 }

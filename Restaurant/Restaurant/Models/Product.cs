@@ -19,7 +19,7 @@ namespace Restaurant.Models
         {
             this.Menu_Product = new HashSet<Menu_Product>();
             this.Order_Product = new HashSet<Order_Product>();
-            this.Allergens = new HashSet<Allergen>();
+            this.Product_Allergen = new HashSet<Product_Allergen>();
         }
     
         public int Product_ID { get; set; }
@@ -37,6 +37,6 @@ namespace Restaurant.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order_Product> Order_Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Allergen> Allergens { get; set; }
+        public virtual ICollection<Product_Allergen> Product_Allergen { get; set; }
     }
 }

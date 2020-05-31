@@ -17,6 +17,7 @@ namespace Restaurant.Models
         public int Menu_ID { get; set; }
         public int Product_ID { get; set; }
         public int Quantity { get; set; }
+        public int Menu_Product_ID { get; set; }
     
         public virtual Menu Menu { get; set; }
         public virtual Product Product { get; set; }

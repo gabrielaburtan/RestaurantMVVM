@@ -17,13 +17,13 @@ namespace Restaurant.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Allergen()
         {
-            this.Products = new HashSet<Product>();
+            this.Product_Allergen = new HashSet<Product_Allergen>();
         }
     
         public int Allergen_ID { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product_Allergen> Product_Allergen { get; set; }
     }
 }

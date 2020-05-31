@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Facultate\Personal\RestaurantMVVM\Restaurant\Restaurant\App.xaml
-11-739132770
+12912655432
 21280832311
-46327434079
+52581228863
 20363719061
-Views\CustomerAccountView.xaml;Views\CustomerView.xaml;Views\EmployeeView.xaml;Views\MenuForAccount.xaml;Views\MenuView.xaml;Views\ProductDetailsView.xaml;Views\SearchView.xaml;Views\SeeCartView.xaml;Views\SignInView.xaml;Views\SignUpView.xaml;Views\StartWindow.xaml;
+Views\ActiveOrders.xaml;Views\CustomerAccountView.xaml;Views\CustomerView.xaml;Views\EmployeeView.xaml;Views\MenuForAccount.xaml;Views\MenuView.xaml;Views\ProductDetailsView.xaml;Views\SearchView.xaml;Views\SeeCartView.xaml;Views\SignInView.xaml;Views\SignUpView.xaml;Views\StartWindow.xaml;
 
 False
 

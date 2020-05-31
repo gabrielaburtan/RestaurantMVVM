@@ -24,17 +24,14 @@
     <Property Name="Photo1" Type="image" />
     <Property Name="Photo2" Type="image" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Restaurant.dbo.Menu_Product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Menu_Product">
     <Key>
-      <PropertyRef Name="Menu_ID" />
-      <PropertyRef Name="Product_ID" />
-      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="Menu_Product_ID" />
     </Key>
     <Property Name="Menu_ID" Type="int" Nullable="false" />
     <Property Name="Product_ID" Type="int" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Menu_Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -43,28 +40,25 @@ warning 6002: The table/view 'Restaurant.dbo.Menu_Product' does not have a prima
     <Property Name="Order_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="User_ID" Type="int" Nullable="false" />
     <Property Name="State" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Restaurant.dbo.Order_Menu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Order_Menu">
     <Key>
-      <PropertyRef Name="Menu_ID" />
-      <PropertyRef Name="Order_ID" />
+      <PropertyRef Name="Order_Menu_ID" />
     </Key>
     <Property Name="Menu_ID" Type="int" Nullable="false" />
     <Property Name="Order_ID" Type="int" Nullable="false" />
+    <Property Name="Order_Menu_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Restaurant.dbo.Order_Product' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Order_Product">
     <Key>
-      <PropertyRef Name="Order_ID" />
-      <PropertyRef Name="Product_ID" />
-      <PropertyRef Name="Quantity" />
+      <PropertyRef Name="Order_Product_ID" />
     </Key>
     <Property Name="Order_ID" Type="int" Nullable="false" />
     <Property Name="Product_ID" Type="int" Nullable="false" />
     <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Order_Product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Product">
     <Key>
@@ -79,15 +73,13 @@ warning 6002: The table/view 'Restaurant.dbo.Order_Product' does not have a prim
     <Property Name="Photo2" Type="image" />
     <Property Name="Category_ID" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="Product_Allergen">
     <Key>
-      <PropertyRef Name="Allergen_ID" />
-      <PropertyRef Name="Product_ID" />
+      <PropertyRef Name="Product_Allergen_ID" />
     </Key>
     <Property Name="Allergen_ID" Type="int" Nullable="false" />
     <Property Name="Product_ID" Type="int" Nullable="false" />
+    <Property Name="Product_Allergen_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>
@@ -270,39 +262,21 @@ warning 6002: The table/view 'Restaurant.dbo.Product_Allergen' does not have a p
   <Function Name="GetQuantityFromProductsForMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="MenuName" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="InsertIntoOrderMenu" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="MenuID" Type="int" Mode="In" />
+    <Parameter Name="OrderID" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="ModelsStoreContainer">
     <EntitySet Name="Allergen" EntityType="Self.Allergen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu_Product" EntityType="Self.Menu_Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_Menu" EntityType="Self.Order_Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order_Product" EntityType="Self.Order_Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product_Allergen" EntityType="Self.Product_Allergen" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Menu_Product" EntityType="Self.Menu_Product" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Menu_Product].[Menu_ID] AS [Menu_ID], 
-    [Menu_Product].[Product_ID] AS [Product_ID], 
-    [Menu_Product].[Quantity] AS [Quantity]
-    FROM [dbo].[Menu_Product] AS [Menu_Product]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="Order_Menu" EntityType="Self.Order_Menu" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Order_Menu].[Menu_ID] AS [Menu_ID], 
-    [Order_Menu].[Order_ID] AS [Order_ID]
-    FROM [dbo].[Order_Menu] AS [Order_Menu]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="Order_Product" EntityType="Self.Order_Product" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Order_Product].[Order_ID] AS [Order_ID], 
-    [Order_Product].[Product_ID] AS [Product_ID], 
-    [Order_Product].[Quantity] AS [Quantity]
-    FROM [dbo].[Order_Product] AS [Order_Product]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="Product_Allergen" EntityType="Self.Product_Allergen" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [Product_Allergen].[Allergen_ID] AS [Allergen_ID], 
-    [Product_Allergen].[Product_ID] AS [Product_ID]
-    FROM [dbo].[Product_Allergen] AS [Product_Allergen]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_Category_Category" Association="Self.FK_Category_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="Category1" EntitySet="Category" />
