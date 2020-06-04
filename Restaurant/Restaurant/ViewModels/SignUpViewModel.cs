@@ -194,6 +194,10 @@ namespace Restaurant.ViewModels
                 }
                 else
                 {
+                    var query = (from users in restaurant.Users
+                                 where users.Email.Equals(EmailProperty)
+                                 select users).First();
+                    SignInViewModel.activeUser = query;
                     StartWindowViewModel.stateUser = true;
                     MenuForAccount menu = new MenuForAccount();
                     App.Current.MainWindow.Close();

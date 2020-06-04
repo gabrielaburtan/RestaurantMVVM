@@ -94,6 +94,7 @@ namespace Restaurant.ViewModels
             }
             else
             {
+                ProductsInCart.Clear();
                 MenuForAccount startWindow = new MenuForAccount();
                 App.Current.MainWindow.Close();
                 App.Current.MainWindow = startWindow;
